@@ -5,6 +5,7 @@
 </template>
 
 <script>
+	import {mapState} from 'vuex'
 	export default {
 		props: {
 			item: {
@@ -32,6 +33,9 @@
 		created() {
 			this.like = this.item.is_like
 		},
+		computed:{
+			...mapState(['userinfo'])
+		},
 		methods: {
 			likeTap() {
 				this.like = !this.like
@@ -41,7 +45,7 @@
 			setUpdateLikes() {
 				uni.showLoading()
 				this.$api.update_like({
-					user_id: '5f6fef93d48ad40001c678e5',
+					user_id: this.userinfo._id,
 					article_id: this.item._id
 				}).then(res => {
 					uni.hideLoading()

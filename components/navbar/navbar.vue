@@ -2,7 +2,9 @@
 	<view class="navbar">
 		<view class="navbar-fixed">
 			<!-- 状态栏 -->
+			<!-- #ifndef MP-ALIPAY -->
 			<view :style="{height:statusBarHeight+'px'}"></view>
+			<!-- #endif -->
 			<!-- 导航栏内容 -->
 			<view class="navbar-content" :class="{search:isSearch}" :style="{height:navBarHeight+'px',width:windowWidth+'px'}"
 			 @click.stop="open">
@@ -65,6 +67,9 @@
 			// (胶囊底部高度 - 状态栏的高度) + (胶囊顶部高度 - 状态栏内的高度) = 导航栏的高度
 			this.navBarHeight = (menuButtonInfo.bottom - info.statusBarHeight) + (menuButtonInfo.top - info.statusBarHeight)
 			this.windowWidth = menuButtonInfo.left
+			// #endif
+			// #ifdef MP-ALIPAY
+			this.statusBarHeight = 0
 			// #endif
 
 		},

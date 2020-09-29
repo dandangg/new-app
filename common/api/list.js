@@ -104,3 +104,10 @@ export const update_user_avatar =  (data) =>{
 		data
 	}) 
 }
+// 登录
+export const login_user =  (data) =>{
+	return $http({
+		url: 'login_user',
+		data
+	}) 
+}

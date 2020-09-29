@@ -3,7 +3,7 @@
 		<!-- 基础卡片 -->
 		<view v-if="item.mode === 'base'" class="listcard">
 			<view class="listcard-image">
-				<image :src="item.cover[0]" mode="aspectFill"></image>
+				<image :src="item.author.avatar" mode="aspectFill"></image>
 			</view>
 			<view class="listcard-content">
 				<view class="listcard-content__title">

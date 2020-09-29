@@ -41,7 +41,7 @@
 				<uni-icons type="arrowright" size="14" color="#666"></uni-icons>
 			</view>
 		</view>
-		<button class="feedback-button" type="primary" @click="exit">登 出</button>
+		<button v-if="userinfo._id" class="feedback-button" type="primary" @click="exit">登 出</button>
 	</view>
 </template>
 
@@ -58,13 +58,14 @@
 		},
 		onLoad(){
 			// console.log(this.userinfo)
+			if(!this.userinfo._id){
+				uni.showToast({
+					title:"请先登录",
+					icon:'none'
+				})
+			}
 		},
 		methods: {
-			exit(){
-				uni.navigateTo({
-					url:'/pages/login/login'
-				})
-			},
 			open(){
 				uni.navigateTo({
 					url:'/pages/my-article/my-article'
@@ -112,6 +113,24 @@
 						icon:"none"
 					})
 				})
+			},
+			exit(){
+				uni.showModal({
+					title:'提示',
+					content:'确定要退出登录吗？',
+					success:(res) =>{
+						console.log(res)
+						if(res.confirm){
+							this.$store.dispatch('clear_userinfo')
+							console.log(this.userinfo)
+							uni.redirectTo({
+								url:'/pages/login/login'
+							})
+						}
+						
+					}
+				})
+				
 			}
 		}
 	}
@@ -192,6 +211,7 @@ page{
 }
 .feedback-button{
 	margin: 0 15px;
+	margin-top: 50px;
 	border-radius: 25px;
 	background-color: $mk-base-color;
 }

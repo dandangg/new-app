@@ -14,6 +14,9 @@ const store = new Vuex.Store({
 		SET_USER_INFO(state,userinfo){
 			state.userinfo = userinfo
 		},
+		CLEAR_USERINFO(state){
+			state.userinfo = {}
+		},
 		SET_HISTORY_LISTS(state, history) {
 			state.historyLists = history
 		},
@@ -25,6 +28,12 @@ const store = new Vuex.Store({
 		set_userinfo({commit},userinfo){
 			uni.setStorageSync('USERINFO',userinfo)
 			commit('SET_USER_INFO',userinfo)
+		},
+		clear_userinfo({
+			commit
+		}){
+			uni.removeStorageSync('USERINFO')
+			commit('CLEAR_USERINFO')
 		},
 		set_history({
 			commit,
